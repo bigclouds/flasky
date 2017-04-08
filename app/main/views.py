@@ -20,9 +20,13 @@ def after_request(response):
                    query.context))
     return response
 
+@main.route('/echo/<info>')
+def echo(info):
+    return info
 
 @main.route('/shutdown')
 def server_shutdown():
+    print 'Shutting down...', request.environ
     if not current_app.testing:
         abort(404)
     shutdown = request.environ.get('werkzeug.server.shutdown')
@@ -35,6 +39,7 @@ def server_shutdown():
 @main.route('/', methods=['GET', 'POST'])
 def index():
     form = PostForm()
+    print request.headers
     if current_user.can(Permission.WRITE_ARTICLES) and \
             form.validate_on_submit():
         post = Post(body=form.body.data,

@@ -8,18 +8,22 @@ class Config:
     SQLALCHEMY_COMMIT_ON_TEARDOWN = True
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_RECORD_QUERIES = True
-    MAIL_SERVER = 'smtp.googlemail.com'
-    MAIL_PORT = 587
+    MAIL_SERVER = 'smtp.163.com'
+    MAIL_PORT = 25
     MAIL_USE_TLS = True
-    MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
-    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
+    #MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
+    #MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
+    MAIL_USERNAME = "yalogr"
+    MAIL_PASSWORD = "82957138"
     FLASKY_MAIL_SUBJECT_PREFIX = '[Flasky]'
-    FLASKY_MAIL_SENDER = 'Flasky Admin <flasky@example.com>'
-    FLASKY_ADMIN = os.environ.get('FLASKY_ADMIN')
+    FLASKY_MAIL_SENDER = 'yalogr@163.com'
+    #FLASKY_ADMIN = os.environ.get('FLASKY_ADMIN')
+    FLASKY_ADMIN = "yalogr@163.com"
     FLASKY_POSTS_PER_PAGE = 20
     FLASKY_FOLLOWERS_PER_PAGE = 50
     FLASKY_COMMENTS_PER_PAGE = 30
     FLASKY_SLOW_DB_QUERY_TIME=0.5
+    WTF_CSRF_ENABLED = False
 
     @staticmethod
     def init_app(app):
@@ -30,6 +34,7 @@ class DevelopmentConfig(Config):
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or \
         'sqlite:///' + os.path.join(basedir, 'data-dev.sqlite')
+    #SQLALCHEMY_DATABASE_URI = 'mongodb://localhost:27017/mail'
 
 
 class TestingConfig(Config):
@@ -40,8 +45,9 @@ class TestingConfig(Config):
 
 
 class ProductionConfig(Config):
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
-        'sqlite:///' + os.path.join(basedir, 'data.sqlite')
+    #SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
+    #    'sqlite:///' + os.path.join(basedir, 'data.sqlite')
+    SQLALCHEMY_DATABASE_URI = 'mongodb://user:password@localhost:27017/mail'
 
     @classmethod
     def init_app(cls, app):

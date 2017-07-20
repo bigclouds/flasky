@@ -33,7 +33,7 @@ class Config:
 class DevelopmentConfig(Config):
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or \
-        'sqlite:///' + os.path.join(basedir, 'data-dev.sqlite')
+        'mysql://flask:123456@localhost:3306/flask'
     #SQLALCHEMY_DATABASE_URI = 'mongodb://localhost:27017/mail'
 
 
